@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: '1.0'
+Resources:
+  SESEmailForwarding:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      CodeUri: .
+      Description: '1.0'
+      MemorySize: 128
+      Timeout: 30
+      Role: 'arn:aws:iam::717271158922:role/service-role/SES-Email-Forwarding'
+      Environment:
+        Variables:
+          MailRecipient: john.hart@yahoo.com
+          MailS3Bucket: email.forwarding.bucket
+          MailSender: forwarder
+          Region: us-east-1
